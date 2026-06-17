@@ -1,3 +1,4 @@
+# VENV
 ## Créer un environement virtuel python
 ```
 python -m venv venv_name
@@ -14,6 +15,8 @@ deactivate
 ```
 which python
 ```
+---
+# PIP
 ## Utilisation de pip --requirement
 **pip install --requirement requirements.txt**  
 **pip install -r requirements.txt**  
@@ -32,3 +35,26 @@ package_4~=3.4.0
 ```
 pip freeze > requirements.txt
 ```
+---
+# POETRY
+## Générer un fichier pyproject.toml dans un projet existant
+**poetry init**  
+## Créer un nouveau projet
+**poetry new nom_projet**
+Cette commande va créer :  
+```
+nom_projet/
+├── pyproject.toml
+├── README.md
+├── src/
+│   └── nom_projet/
+│       └── __init__.py
+└── tests/
+```
+## Ajouter des dépendances
+**poetry add dependance_1 dependance_2 ...**  
+**poetry add "dependance>=2,<3"** *avec N° de version*  
+## Ajouter des dépendances de développement
+**poetry add --group dev pytest mypy**  
+## Installer les dépendances
+**poetry install**  

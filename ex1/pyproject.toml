@@ -1,0 +1,21 @@
+[tool.poetry]
+package-mode = false
+
+[project]
+name = "the_matrix"
+version = "42"
+description = "42 - Common Core - The Matrix..."
+authors = [
+    {name = "Sergio"}
+]
+license = {text = "GNU"}
+requires-python = ">=3.13"
+dependencies = [
+    "numpy",
+    "pandas",
+    "matplotlib"
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
