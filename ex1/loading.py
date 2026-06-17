@@ -2,22 +2,16 @@
 
 
 from importlib import metadata, import_module
-
-import pandas
-import numpy
-import matplotlib
+from types import ModuleType
 
 
-def loading() -> None:
-    print("LOADING STATUS: Loading programs...")
-    print("")
-    print("Checking dependencies:")
-    dependances: list[str] = ["pandas", "numpy", "matplotlib"]
+def check_packages(dependances: dict[str, ModuleType]) -> bool:
+    dep_ok: bool = True
     for dep in dependances:
         try:
+            dependances[dep] = import_module(dep)
             print(f"[OK] {dep} - {metadata.version(dep)}")
-            print("")
-        except metadata.PackageNotFoundError:
+        except (ImportError):
             print(f"{dep} : MISSING")
             print("Installing with pip :")
             print("    => pip install -r requirements.txt")
@@ -25,15 +19,33 @@ def loading() -> None:
             print("Installing with Poetry :")
             print("    => poetry install")
             print("    => poetry run python loading.py")
-            print("")
+            dep_ok = False
+    return (dep_ok)
 
-    print("Analyzing Matrix data...")
-    print("Processing 1000 data points...")
-    print("Generating visualization...")
+
+def loading() -> None:
+    print("LOADING STATUS: Loading programs...")
     print("")
+    print("Checking dependencies:")
+    dependances: dict[str, ModuleType] = {
+        "pandas": None,
+        "numpy": None,
+        "matplotlib": None
+    }
+    if check_packages(dependances):
+        print("")
 
-    print("Analysis complete!")
-    print("Results saved to: matrix_analysis.png")
+        print("Analyzing Matrix data...")
+        print("")
+
+        print("Processing 1000 data points...")
+        print("")
+
+        print("Generating visualization...")
+        print("")
+
+        print("Analysis complete!")
+        print("Results saved to: matrix_analysis.png")
 
 
 if __name__ == "__main__":
