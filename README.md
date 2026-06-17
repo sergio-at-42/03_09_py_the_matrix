@@ -58,3 +58,19 @@ nom_projet/
 **poetry add --group dev pytest mypy**  
 ## Installer les dépendances
 **poetry install**  
+---
+# PYTHON-DOTENV
+## Installer python-dotenv
+**pip install python-dotenv**  
+## Importer python-dotenv
+```
+import dotenv
+```
+## Charger un fichier ENV
+**dotenv.load_dotenv()**               *charge le fichier .env*  
+**dotenv.load_dotenv(".env.dev")**     *charge le fichier .env spécifié*  
+**dotenv.load_dotenv(override=True)**  *charge le fichier .env, et force le remplacement des variables*  
+## Lire une variable d'environnement (nécessite import os)
+**os.getenv("variable_env")**   *os.getenv renvoie un str*  
+## Lire le fichier sans modifier l'environnement
+**dotenv.dotenv_values(".fichier_env")**    *renvoie un dictionnaire des variables du fichier env*
