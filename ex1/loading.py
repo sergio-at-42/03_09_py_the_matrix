@@ -5,13 +5,12 @@ from importlib import metadata, import_module
 from types import ModuleType
 
 
-def check_package(package_name: str) -> ModuleType:
-    package: ModuleType = None
+def check_package(pack_name: str) -> ModuleType | None:
+    pack: ModuleType | None = None
     try:
-        package = import_module(package_name)
-        print(f"[OK] {package.__name__} - {metadata.version(package.__package__)}")
+        pack = import_module(pack_name)
     except (ImportError):
-        print(f"{package_name} : MISSING")
+        print(f"{pack_name} : MISSING")
         print("Installing with pip :")
         print("    => pip install -r requirements.txt")
         print("    => python3 loading.py")
@@ -19,16 +18,19 @@ def check_package(package_name: str) -> ModuleType:
         print("    => poetry install")
         print("    => poetry run python loading.py")
         print("")
-    return (package)
+    else:
+        assert pack.__package__ is not None
+        print(f"[OK] {pack.__name__} - {metadata.version(pack.__package__)}")
+    return (pack)
 
 
 def loading() -> None:
     print("LOADING STATUS: Loading programs...")
     print("")
     print("Checking dependencies:")
-    pandas: ModuleType = check_package("pandas")
-    numpy: ModuleType = check_package("numpy")
-    pyplot: ModuleType = check_package("matplotlib.pyplot")
+    pandas: ModuleType | None = check_package("pandas")
+    numpy: ModuleType | None = check_package("numpy")
+    pyplot: ModuleType | None = check_package("matplotlib.pyplot")
 
     if pandas and numpy and pyplot:
         print("")

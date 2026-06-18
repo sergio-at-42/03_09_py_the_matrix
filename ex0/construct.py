@@ -8,7 +8,7 @@ import site
 
 def construct() -> None:
     # if hasattr(sys, "real_prefix")  or (sys.base_prefix != sys.prefix):
-    venv_path: str = os.environ.get('VIRTUAL_ENV')   # ou sys.prefix
+    venv_path: str | None = os.environ.get('VIRTUAL_ENV')   # ou sys.prefix
     if venv_path:
         print("MATRIX STATUS: Welcome to the construct")
         print("")
@@ -21,8 +21,10 @@ def construct() -> None:
         print("Safe to install packages without affecting the global system.")
         print("")
         print("Package installation path:")
-        venv_site_packages: list[str] = [p for p in site.getsitepackages() if "site-packages" in p and p.startswith(sys.prefix)]
-        print(f"{venv_site_packages[0] if venv_site_packages else "Not Found..."}")
+        site_packages: list[str] = [p for p in site.getsitepackages()
+                                    if "site-packages" in p
+                                    and p.startswith(sys.prefix)]
+        print(f"{site_packages[0] if site_packages else "Not Found..."}")
     else:
         print("MATRIX STATUS: You’re still plugged in")
         print("")
