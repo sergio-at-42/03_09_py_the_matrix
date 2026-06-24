@@ -13,6 +13,8 @@ def check_package(package_name: str) -> ModuleType | None:
     except (ImportError):
         print(f"{package_name} package not installed.")
         print(f"Installing with pip => pip install {package_name}")
+        print("Installing with pip => pip install -r requirements.txt")
+        print("Installing with Poetry => poetry install")
         print("")
     return (package)
 
@@ -48,7 +50,8 @@ def oracle() -> None:
     if load_conf(conf):
         print("Configuration loaded:")
         print(f"Mode: {conf["MATRIX_MODE"] if conf["MATRIX_MODE"]
-                       else "No mode selected"} Database: ", end="")
+                       else "No mode selected"}")
+        print("Database: ", end="")
         if conf["DATABASE_URL"]:
             database: str = "local" \
                 if conf["DATABASE_URL"].find("localhost") >= 0 else "distant"

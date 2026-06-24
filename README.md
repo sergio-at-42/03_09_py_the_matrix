@@ -51,6 +51,13 @@ nom_projet/
 │       └── __init__.py
 └── tests/
 ```
+## Petry en mode projet ou uniquement gestion de packages
+```
+**[tool.poetry]
+package-mode = false
+```
+true *mode projet (valeurs par defaut)*   
+false *mode gestion de packages uniquement*   
 ## Ajouter des dépendances
 **poetry add dependance_1 dependance_2 ...**  
 **poetry add "dependance>=2,<3"** *avec N° de version*  
